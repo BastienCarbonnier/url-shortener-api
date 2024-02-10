@@ -1,4 +1,4 @@
-package com.carbonnb.urlshortener.model;
+package com.carbonnb.urlshortener.model.dto;
 
 import lombok.Data;
 
