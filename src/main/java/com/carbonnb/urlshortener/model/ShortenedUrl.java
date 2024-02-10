@@ -1,11 +1,22 @@
 package com.carbonnb.urlshortener.model;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
-import java.io.Serializable;
+import java.util.UUID;
 
+@Entity
 @Data
-public class ShortenedUrl implements Serializable {
-    String originalUrl;
+@Table(name = "shortened-url")
+public class ShortenedUrl {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
+    @Column(name = "full_url")
+    String fullUrl;
+
+    @Column(name = "shortened_url")
     String shortenedUrl;
 }

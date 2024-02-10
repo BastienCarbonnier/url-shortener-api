@@ -1,5 +1,13 @@
 services:
-  redis:
-    image: 'redis:latest'
+  postgres-postgresql:
+    image: postgres:16.1-alpine
+    volumes:
+      - postgresql-volume-shortener:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=url-shortener
+      - POSTGRES_USER=shortener
+      - POSTGRES_PASSWORD=Pa55wOrd
     ports:
-      - '6379'
+      - 5432:5432
+volumes:
+  postgresql-volume-shortener:

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+            http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+            http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+    <changeSet id="202402101356" author="Bastien Carbonnier">
+        <createTable tableName="shortened-url">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" primaryKeyName="url_shortener_id" />
+            </column>
+            <column name="full_url" type="varchar(250)">
+                <constraints unique="true" uniqueConstraintName="full_url_unq"/>
+            </column>
+            <column name="shortened_url" type="varchar(250)">
+                <constraints unique="true" uniqueConstraintName="shortened_url_unq" />
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

@@ -1,21 +1,11 @@
 package com.carbonnb.urlshortener.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Component;
+import com.carbonnb.urlshortener.model.ShortenedUrl;
+import org.springframework.data.repository.CrudRepository;
 
-@Component
-public class ShortenedUrlRepository {
-    @Autowired
-    private RedisTemplate<String, String> redisTemplate;
+import java.util.Optional;
+import java.util.UUID;
 
-    public void save(String fullUrl, String shortenUrl) {
-        redisTemplate.opsForValue()
-                .set(fullUrl, shortenUrl);
-    }
-
-    public String findByUrl(String url) {
-        return redisTemplate.opsForValue()
-                .get(url);
-    }
+public interface ShortenedUrlRepository extends CrudRepository<ShortenedUrl, UUID> {
+    Optional<ShortenedUrl> findByFullUrl(String fullUrl);
 }

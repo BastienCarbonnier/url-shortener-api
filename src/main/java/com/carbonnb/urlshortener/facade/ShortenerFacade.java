@@ -8,6 +8,9 @@ import com.carbonnb.urlshortener.services.ShortenedUrlService;
 import com.carbonnb.urlshortener.utils.UrlShortenerUtils;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+import java.util.UUID;
+
 
 @Component
 public class ShortenerFacade {
@@ -18,20 +21,30 @@ public class ShortenerFacade {
     }
 
     public ResponseDTO<ShortenedUrlDTO> shortenUrl(RequestDTO request) {
-        ShortenedUrl shortenUrl = new ShortenedUrl();
-        shortenUrl.setOriginalUrl(request.getUrlToShorten());
-
-        String encodedUrl = UrlShortenerUtils.encodeUrl(request.getUrlToShorten());
-
-        shortenUrl.setShortenedUrl(encodedUrl);
-        String existingUrl = this.shortenedUrlService.getShortenedUrl(encodedUrl);
-
-        this.shortenedUrlService.save(shortenUrl);
-
         ResponseDTO<ShortenedUrlDTO> response = new ResponseDTO<>();
-        ShortenedUrlDTO shortenedUrlDTO = new ShortenedUrlDTO(shortenUrl);
-        // Generate Int64 de 0 to 15M encoded to base62 wiil be the
-        shortenedUrlDTO.setAlreadyShortened(true);
+        ShortenedUrlDTO shortenedUrlDTO = new ShortenedUrlDTO();
+
+        Optional<ShortenedUrl> shortenedUrlOptional = this.shortenedUrlService.findByFullUrl(request.getUrlToShorten());
+        if (shortenedUrlOptional.isPresent()) {
+            ShortenedUrl existingShortenedUrl = shortenedUrlOptional.get();
+            shortenedUrlDTO.setAlreadyShortened(true);
+            shortenedUrlDTO.setShortenedUrl(existingShortenedUrl.getShortenedUrl());
+            String decodedFullUrl = UrlShortenerUtils.decodeUrl(existingShortenedUrl.getFullUrl());
+            shortenedUrlDTO.setFullUrl(decodedFullUrl);
+        } else {
+            ShortenedUrl shortenUrl = new ShortenedUrl();
+
+            String encodedFullUrl = UrlShortenerUtils.encodeUrl(request.getUrlToShorten());
+            shortenUrl.setFullUrl(encodedFullUrl);
+
+            // TODO: Generate Int64 de 0 to 15M encoded to base62 wiil be the
+            shortenUrl.setShortenedUrl(UUID.randomUUID().toString());
+            this.shortenedUrlService.save(shortenUrl);
+
+            shortenedUrlDTO.setShortenedUrl(shortenUrl.getShortenedUrl());
+            shortenedUrlDTO.setFullUrl(shortenUrl.getFullUrl());
+        }
+
         response.setData(shortenedUrlDTO);
 
         return response;

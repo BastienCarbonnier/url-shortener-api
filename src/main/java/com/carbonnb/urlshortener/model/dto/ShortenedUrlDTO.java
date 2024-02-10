@@ -7,14 +7,9 @@ import lombok.Setter;
 @Data
 @Setter
 public class ShortenedUrlDTO {
-    private String originalUrl;
+    private String fullUrl;
     private String shortenedUrl;
-    private Boolean alreadyShortened;
+    private Boolean alreadyShortened = false;
 
     public ShortenedUrlDTO() {}
-
-    public ShortenedUrlDTO(ShortenedUrl shortenedUrl) {
-        this.originalUrl = shortenedUrl.getOriginalUrl();
-        this.shortenedUrl = shortenedUrl.getShortenedUrl();
-    }
 }
