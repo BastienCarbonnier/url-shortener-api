@@ -16,7 +16,7 @@
             <column name="full_url" type="varchar(250)">
                 <constraints unique="true" uniqueConstraintName="full_url_unq"/>
             </column>
-            <column name="shortened_url" type="varchar(250)">
+            <column name="shortened_url" type="varchar(10)">
                 <constraints unique="true" uniqueConstraintName="shortened_url_unq" />
             </column>
         </createTable>

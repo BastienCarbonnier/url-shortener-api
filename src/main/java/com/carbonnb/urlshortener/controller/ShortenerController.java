@@ -1,5 +1,6 @@
 package com.carbonnb.urlshortener.controller;
 
+import com.carbonnb.urlshortener.exception.UrlShortenerTechnicalException;
 import com.carbonnb.urlshortener.facade.ShortenerFacade;
 import com.carbonnb.urlshortener.model.dto.*;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class ShortenerController {
      }
 
      @GetMapping("/")
-     public ResponseEntity<ResponseDTO<ResponseUrlDTO>> getFullUrlForShortenedOne(@RequestParam(required = false) String shortUrl) {
+     public ResponseEntity<ResponseDTO<ResponseUrlDTO>> getFullUrlForShortenedOne(@RequestParam(required = false) String shortUrl) throws UrlShortenerTechnicalException {
           return new ResponseEntity<>(this.shortenerFacade.findByShortenedUrl(shortUrl), HttpStatus.OK);
      }
 }

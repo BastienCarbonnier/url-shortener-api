@@ -1,5 +1,7 @@
 package com.carbonnb.urlshortener.facade;
 
+import com.carbonnb.urlshortener.exception.ErrorCodeExceptionEnum;
+import com.carbonnb.urlshortener.exception.UrlShortenerTechnicalException;
 import com.carbonnb.urlshortener.model.ShortenedUrl;
 import com.carbonnb.urlshortener.model.dto.*;
 import com.carbonnb.urlshortener.services.ShortenedUrlService;
@@ -48,14 +50,14 @@ public class ShortenerFacade {
         return response;
     }
 
-    public ResponseDTO<ResponseUrlDTO> findByShortenedUrl(String shortUrl) {
+    public ResponseDTO<ResponseUrlDTO> findByShortenedUrl(String shortUrl) throws UrlShortenerTechnicalException {
         ResponseDTO<ResponseUrlDTO> response = new ResponseDTO<>();
 
         // TODO: Handle error if not exist return 404
         ResponseUrlDTO responseUrlDTO = new ResponseUrlDTO();
 
         ShortenedUrl shortenedUrl = this.shortenedUrlService.findByShortenedUrl(shortUrl).orElseThrow(
-
+                () -> new UrlShortenerTechnicalException(ErrorCodeExceptionEnum.SHORT_URL_DOESNT_EXIST)
         );
 
         responseUrlDTO.setFullUrl(UrlShortenerUtils.decodeUrl(shortenedUrl.getFullUrl()));
