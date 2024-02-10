@@ -8,4 +8,5 @@ import java.util.UUID;
 
 public interface ShortenedUrlRepository extends CrudRepository<ShortenedUrl, UUID> {
     Optional<ShortenedUrl> findByFullUrl(String fullUrl);
+    Optional<ShortenedUrl> findByShortenedUrl(String shortenedUrl);
 }

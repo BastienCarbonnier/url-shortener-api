@@ -1,9 +1,7 @@
 package com.carbonnb.urlshortener.facade;
 
 import com.carbonnb.urlshortener.model.ShortenedUrl;
-import com.carbonnb.urlshortener.model.dto.RequestDTO;
-import com.carbonnb.urlshortener.model.dto.ResponseDTO;
-import com.carbonnb.urlshortener.model.dto.ShortenedUrlDTO;
+import com.carbonnb.urlshortener.model.dto.*;
 import com.carbonnb.urlshortener.services.ShortenedUrlService;
 import com.carbonnb.urlshortener.utils.UrlShortenerUtils;
 import org.springframework.stereotype.Component;
@@ -47,6 +45,21 @@ public class ShortenerFacade {
 
         response.setData(shortenedUrlDTO);
 
+        return response;
+    }
+
+    public ResponseDTO<ResponseUrlDTO> findByShortenedUrl(String shortUrl) {
+        ResponseDTO<ResponseUrlDTO> response = new ResponseDTO<>();
+
+        // TODO: Handle error if not exist return 404
+        ResponseUrlDTO responseUrlDTO = new ResponseUrlDTO();
+
+        ShortenedUrl shortenedUrl = this.shortenedUrlService.findByShortenedUrl(shortUrl).orElseThrow(
+
+        );
+
+        responseUrlDTO.setFullUrl(UrlShortenerUtils.decodeUrl(shortenedUrl.getFullUrl()));
+        response.setData(responseUrlDTO);
         return response;
     }
 }

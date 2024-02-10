@@ -23,4 +23,8 @@ public class ShortenedUrlService {
         String encodedFullUrl = UrlShortenerUtils.encodeUrl(fullUrl);
         return this.shortenedUrlRepository.findByFullUrl(encodedFullUrl);
     }
+
+    public Optional<ShortenedUrl> findByShortenedUrl(String shortenedUrl) {
+        return this.shortenedUrlRepository.findByShortenedUrl(shortenedUrl);
+    }
 }
