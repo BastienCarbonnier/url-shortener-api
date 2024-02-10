@@ -14,8 +14,8 @@ public class ShortenedUrlRepository {
                 .set(fullUrl, shortenUrl);
     }
 
-    public String findByShortUrl(String shortUrl) {
+    public String findByUrl(String url) {
         return redisTemplate.opsForValue()
-                .get(shortUrl);
+                .get(url);
     }
 }

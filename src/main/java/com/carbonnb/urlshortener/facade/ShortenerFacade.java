@@ -1,9 +1,11 @@
 package com.carbonnb.urlshortener.facade;
 
+import com.carbonnb.urlshortener.model.ShortenedUrl;
 import com.carbonnb.urlshortener.model.dto.RequestDTO;
 import com.carbonnb.urlshortener.model.dto.ResponseDTO;
 import com.carbonnb.urlshortener.model.dto.ShortenedUrlDTO;
 import com.carbonnb.urlshortener.services.ShortenedUrlService;
+import com.carbonnb.urlshortener.utils.UrlShortenerUtils;
 import org.springframework.stereotype.Component;
 
 
@@ -16,17 +18,21 @@ public class ShortenerFacade {
     }
 
     public ResponseDTO<ShortenedUrlDTO> shortenUrl(RequestDTO request) {
-        ShortenedUrlDTO shortenUrl = new ShortenedUrlDTO();
+        ShortenedUrl shortenUrl = new ShortenedUrl();
         shortenUrl.setOriginalUrl(request.getUrlToShorten());
-        shortenUrl.setShortenedUrl(request.getResourceHost());
 
-        ResponseDTO<ShortenedUrlDTO> response = new ResponseDTO<>();
-        response.setData(shortenUrl);
+        String encodedUrl = UrlShortenerUtils.encodeUrl(request.getUrlToShorten());
+
+        shortenUrl.setShortenedUrl(encodedUrl);
+        String existingUrl = this.shortenedUrlService.getShortenedUrl(encodedUrl);
 
         this.shortenedUrlService.save(shortenUrl);
 
-
-
+        ResponseDTO<ShortenedUrlDTO> response = new ResponseDTO<>();
+        ShortenedUrlDTO shortenedUrlDTO = new ShortenedUrlDTO(shortenUrl);
+        // Generate Int64 de 0 to 15M encoded to base62 wiil be the
+        shortenedUrlDTO.setAlreadyShortened(true);
+        response.setData(shortenedUrlDTO);
 
         return response;
     }

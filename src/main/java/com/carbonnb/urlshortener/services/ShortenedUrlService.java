@@ -1,6 +1,5 @@
 package com.carbonnb.urlshortener.services;
 
-import com.carbonnb.urlshortener.model.dto.ShortenedUrlDTO;
 import com.carbonnb.urlshortener.repository.ShortenedUrlRepository;
 import com.carbonnb.urlshortener.model.ShortenedUrl;
 import org.springframework.stereotype.Component;
@@ -13,14 +12,11 @@ public class ShortenedUrlService {
         this.shortenedUrlRepository = shortenedUrlRepository;
     }
 
-    public void save(ShortenedUrlDTO shortenedUrlDTO) {
-        ShortenedUrl shortenedUrl = new ShortenedUrl();
-        shortenedUrl.setFullUrl(shortenedUrlDTO.getOriginalUrl());
-        shortenedUrl.setShortenedUrl(shortenedUrlDTO.getShortenedUrl());
-        this.shortenedUrlRepository.save(shortenedUrl.getShortenedUrl(), shortenedUrl.getFullUrl());
+    public void save(ShortenedUrl shortenedUrl) {
+        this.shortenedUrlRepository.save(shortenedUrl.getShortenedUrl(), shortenedUrl.getOriginalUrl());
     }
 
-    public String getShortenedUrlForFullUrl(String shortUrl) {
-        return this.shortenedUrlRepository.findByShortUrl(shortUrl);
+    public String getShortenedUrl(String encodedUrl) {
+        return this.shortenedUrlRepository.findByUrl(encodedUrl);
     }
 }

@@ -6,6 +6,6 @@ import java.io.Serializable;
 
 @Data
 public class ShortenedUrl implements Serializable {
-    String fullUrl;
+    String originalUrl;
     String shortenedUrl;
 }
