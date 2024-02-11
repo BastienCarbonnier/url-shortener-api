@@ -9,7 +9,6 @@ import com.carbonnb.urlshortener.utils.UrlShortenerUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-import java.util.UUID;
 
 
 @Component
@@ -29,20 +28,20 @@ public class ShortenerFacade {
             ShortenedUrl existingShortenedUrl = shortenedUrlOptional.get();
             shortenedUrlDTO.setAlreadyShortened(true);
             shortenedUrlDTO.setShortenedUrl(existingShortenedUrl.getShortenedUrl());
-            String decodedFullUrl = UrlShortenerUtils.decodeUrl(existingShortenedUrl.getFullUrl());
+            String decodedFullUrl = UrlShortenerUtils.decodeFromBase64Url(existingShortenedUrl.getFullUrl());
             shortenedUrlDTO.setFullUrl(decodedFullUrl);
         } else {
             ShortenedUrl shortenUrl = new ShortenedUrl();
 
-            String encodedFullUrl = UrlShortenerUtils.encodeUrl(request.getUrlToShorten());
+            String encodedFullUrl = UrlShortenerUtils.encodeToBase64Url(request.getUrlToShorten());
             shortenUrl.setFullUrl(encodedFullUrl);
 
-            // TODO: Generate Int64 de 0 to 15M encoded to base62 wiil be the
-            shortenUrl.setShortenedUrl(UUID.randomUUID().toString());
+            String shortUrl = UrlShortenerUtils.shortenUrl(shortenUrl.getId().toString());
+            shortenUrl.setShortenedUrl(shortUrl);
             this.shortenedUrlService.save(shortenUrl);
 
             shortenedUrlDTO.setShortenedUrl(shortenUrl.getShortenedUrl());
-            shortenedUrlDTO.setFullUrl(shortenUrl.getFullUrl());
+            shortenedUrlDTO.setFullUrl(UrlShortenerUtils.decodeFromBase64Url(shortenUrl.getFullUrl()));
         }
 
         response.setData(shortenedUrlDTO);
@@ -60,7 +59,7 @@ public class ShortenerFacade {
                 () -> new UrlShortenerTechnicalException(ErrorCodeExceptionEnum.SHORT_URL_DOESNT_EXIST)
         );
 
-        responseUrlDTO.setFullUrl(UrlShortenerUtils.decodeUrl(shortenedUrl.getFullUrl()));
+        responseUrlDTO.setFullUrl(UrlShortenerUtils.decodeFromBase64Url(shortenedUrl.getFullUrl()));
         response.setData(responseUrlDTO);
         return response;
     }

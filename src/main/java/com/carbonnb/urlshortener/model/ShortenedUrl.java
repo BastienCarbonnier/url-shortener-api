@@ -10,6 +10,10 @@ import java.util.UUID;
 @Table(name = "shortened-url")
 public class ShortenedUrl {
 
+    public ShortenedUrl() {
+        this.id = UUID.randomUUID();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;

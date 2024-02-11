@@ -20,7 +20,7 @@ public class ShortenedUrlService {
     }
 
     public Optional<ShortenedUrl> findByFullUrl(String fullUrl) {
-        String encodedFullUrl = UrlShortenerUtils.encodeUrl(fullUrl);
+        String encodedFullUrl = UrlShortenerUtils.encodeToBase64Url(fullUrl);
         return this.shortenedUrlRepository.findByFullUrl(encodedFullUrl);
     }
 
