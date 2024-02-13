@@ -9,7 +9,7 @@ services:
     image: shortener-api
     build:
       context: .
-    container_name: shortener-api
+    container_name: url-shortener-api
     depends_on:
       - url-shortener-db
     environment:
@@ -18,7 +18,17 @@ services:
       - SPRING_DATASOURCE_PASSWORD=Pa55wOrd
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     ports:
-      - 8080:8080
+      - "8080:8080"
+
+  url-shortener-ui:
+    image: url-shortener-ui
+    ports:
+      - "3000:3000"
+    depends_on:
+      - url-shortener-api
+    environment:
+      - VITE_URL_SHORTNER_API_URL=url-shortener-api:8080
+      - PORT=3000
 
   url-shortener-db:
     image: postgres:16.1-alpine
@@ -30,7 +40,7 @@ services:
       - POSTGRES_USER=shortener
       - POSTGRES_PASSWORD=Pa55wOrd
     ports:
-      - 5432:5432
+      - "5432:5432"
 
 volumes:
   postgresql-volume-shortener:
