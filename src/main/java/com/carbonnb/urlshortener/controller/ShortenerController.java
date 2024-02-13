@@ -17,13 +17,24 @@ public class ShortenerController {
           this.shortenerFacade = shortenerFacade;
      }
 
+     /**
+      * Endpoint to short an Url and persist it in database
+      * @param request The full url to short
+      * @return The shortened Url
+      */
      @PostMapping("/shorten")
      public ResponseEntity<ResponseDTO<ShortenedUrlDTO>> shortenUrl(@RequestBody RequestDTO request) {
           return new ResponseEntity<>(this.shortenerFacade.shortenUrl(request), HttpStatus.OK);
      }
 
+     /**
+      * Endpoint to get full url from shortened one
+      * @param shortUrlId Shortened Url id
+      * @return The full url if present otherwise throw a 404 exception
+      * @throws UrlShortenerTechnicalException Technical exception thrown if short url doesn't exist in database
+      */
      @GetMapping("/")
-     public ResponseEntity<ResponseDTO<ResponseUrlDTO>> getFullUrlForShortenedOne(@RequestParam(required = false) String shortUrl) throws UrlShortenerTechnicalException {
-          return new ResponseEntity<>(this.shortenerFacade.findByShortenedUrl(shortUrl), HttpStatus.OK);
+     public ResponseEntity<ResponseDTO<ResponseUrlDTO>> getFullUrlForShortenedOne(@RequestParam(required = false) String shortUrlId) throws UrlShortenerTechnicalException {
+          return new ResponseEntity<>(this.shortenerFacade.findByShortenedUrl(shortUrlId), HttpStatus.OK);
      }
 }

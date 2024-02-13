@@ -12,6 +12,12 @@ import java.util.Date;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {
+    /**
+     * Exception Handler to return a formatted Exception message
+     * @param ex UrlShortenerTechnicalException
+     * @param request Request that caused Exception
+     * @return ErrorMessage
+     */
     @ExceptionHandler(UrlShortenerTechnicalException.class)
     public ResponseEntity<ResponseDTO<ErrorMessage>> resourceNotFoundException(UrlShortenerTechnicalException ex, WebRequest request) {
         HttpStatus status = ex.getErrorCode().getHttpStatus();
