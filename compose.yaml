@@ -1,38 +1,13 @@
-version: '2'
+version: '3'
 
 networks:
   url-shortener:
     driver: bridge
 
 services:
-  url-shortener-api:
-    image: shortener-api
-    build:
-      context: .
-    container_name: url-shortener-api
-    depends_on:
-      - url-shortener-db
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://url-shortener-db:5432/url-shortener
-      - SPRING_DATASOURCE_USERNAME=shortener
-      - SPRING_DATASOURCE_PASSWORD=Pa55wOrd
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-    ports:
-      - "8080:8080"
-
-  url-shortener-ui:
-    image: url-shortener-ui
-    ports:
-      - "3000:3000"
-    depends_on:
-      - url-shortener-api
-    environment:
-      - VITE_URL_SHORTNER_API_URL=url-shortener-api:8080
-      - PORT=3000
-
   url-shortener-db:
     image: postgres:16.1-alpine
-    container_name: url-shortener-db
+    container_name: url-shortener-db-dev
     volumes:
       - postgresql-volume-shortener:/var/lib/postgresql/data/
     environment:
