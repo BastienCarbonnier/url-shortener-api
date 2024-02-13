@@ -8,7 +8,7 @@ public enum ErrorCodeExceptionEnum {
 
     // General
     GENERAL_1("error.exception-backend.general", "Technical exception"),
-    SHORT_URL_DOESNT_EXIST("error.exception-backend.short-url-not-exist", "Short Url not exist in database", HttpStatus.NOT_FOUND);
+    SHORT_URL_DOESNT_EXIST("error.exception-backend.short-url-not-exist", "Short Url doesn't exist in database", HttpStatus.NOT_FOUND);
 
 
     private final String userInfo;

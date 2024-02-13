@@ -1,6 +1,5 @@
 package com.carbonnb.urlshortener.model.dto;
 
-import com.carbonnb.urlshortener.model.ShortenedUrl;
 import lombok.Data;
 import lombok.Setter;
 
