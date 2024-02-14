@@ -21,4 +21,10 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet author="Bastien Carbonnier" id="202402140900">
+        <modifyDataType
+                columnName="full_url"
+                newDataType="varchar"
+                tableName="shortened-url"/>
+    </changeSet>
 </databaseChangeLog>
