@@ -33,17 +33,18 @@ public class ShortenerControllerTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
+    private static final String SHORT_URL = "shorturl";
+    private static final String FULL_URL = "http://www.google.com/test";
+
     @Test
     public void shouldShortUrl() throws Exception {
-        String fullUrl = "http://www.google.com/";
-        String shortUrl = "shorturl";
         RequestDTO requestDTO = new RequestDTO();
-        requestDTO.setUrlToShorten(fullUrl);
+        requestDTO.setUrlToShorten(FULL_URL);
 
         ResponseDTO<ShortenedUrlDTO> responseDTO = new ResponseDTO<>();
         ShortenedUrlDTO shortenedUrlDTO = new ShortenedUrlDTO();
-        shortenedUrlDTO.setFullUrl(fullUrl);
-        shortenedUrlDTO.setShortenedUrl(shortUrl);
+        shortenedUrlDTO.setFullUrl(FULL_URL);
+        shortenedUrlDTO.setShortenedUrl(SHORT_URL);
         shortenedUrlDTO.setAlreadyShortened(false);
         responseDTO.setData(shortenedUrlDTO);
 

@@ -1,4 +1,4 @@
-package com.carbonnb.urlshortener.integrations;
+package com.carbonnb.urlshortener.integrations.helper;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterAll;
@@ -11,7 +11,7 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 
 @DirtiesContext
-public class PostgresqlContainerBaseTest {
+public class PostgresqlContainerBase {
     @LocalServerPort
     private Integer port;
 

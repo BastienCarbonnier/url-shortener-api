@@ -1,6 +1,6 @@
 package com.carbonnb.urlshortener.integrations.services;
 
-import com.carbonnb.urlshortener.integrations.PostgresqlContainerBaseTest;
+import com.carbonnb.urlshortener.integrations.helper.PostgresqlContainerBase;
 import com.carbonnb.urlshortener.model.ShortenedUrl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ShortenedUrlServiceTest extends PostgresqlContainerBaseTest {
+public class ShortenedUrlServiceIT extends PostgresqlContainerBase {
     @Autowired
     private ShortenedUrlService shortenedUrlService;
 
