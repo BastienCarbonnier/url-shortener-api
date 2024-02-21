@@ -16,6 +16,9 @@ before_script:
   - GRADLE_USER_HOME="$(pwd)/.gradle"
   - export GRADLE_USER_HOME
 
+variables:
+  DOCKER_TLS_CERTDIR: ""
+
 build:
   stage: build
   script: gradle --build-cache assemble
