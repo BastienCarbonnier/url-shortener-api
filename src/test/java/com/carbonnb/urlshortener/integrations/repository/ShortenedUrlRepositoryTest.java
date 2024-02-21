@@ -1,6 +1,6 @@
-package com.carbonnb.urlshortener.repository;
+package com.carbonnb.urlshortener.integrations.repository;
 
-import com.carbonnb.urlshortener.PostgresqlContainerBaseTest;
+import com.carbonnb.urlshortener.integrations.PostgresqlContainerBaseTest;
 import com.carbonnb.urlshortener.model.ShortenedUrl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

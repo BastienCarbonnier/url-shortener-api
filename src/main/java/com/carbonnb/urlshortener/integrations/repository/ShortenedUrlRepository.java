@@ -1,4 +1,4 @@
-package com.carbonnb.urlshortener.repository;
+package com.carbonnb.urlshortener.integrations.repository;
 
 import com.carbonnb.urlshortener.model.ShortenedUrl;
 import org.springframework.data.repository.CrudRepository;

@@ -29,6 +29,7 @@ dependencies {
 	testImplementation 'org.testcontainers:postgresql'
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'io.rest-assured:rest-assured'
+	testImplementation 'org.mockito:mockito-core:2.16.0'
 	runtimeOnly 'org.postgresql:postgresql'
 	implementation 'org.liquibase:liquibase-core'
 	compileOnly 'org.projectlombok:lombok'

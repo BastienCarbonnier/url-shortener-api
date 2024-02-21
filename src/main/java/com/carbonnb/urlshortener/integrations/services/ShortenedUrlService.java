@@ -1,6 +1,6 @@
-package com.carbonnb.urlshortener.services;
+package com.carbonnb.urlshortener.integrations.services;
 
-import com.carbonnb.urlshortener.repository.ShortenedUrlRepository;
+import com.carbonnb.urlshortener.integrations.repository.ShortenedUrlRepository;
 import com.carbonnb.urlshortener.model.ShortenedUrl;
 import com.carbonnb.urlshortener.utils.UrlShortenerUtils;
 import org.springframework.stereotype.Component;

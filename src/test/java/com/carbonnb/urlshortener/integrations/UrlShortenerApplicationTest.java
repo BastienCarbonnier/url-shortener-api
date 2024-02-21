@@ -1,4 +1,4 @@
-package com.carbonnb.urlshortener;
+package com.carbonnb.urlshortener.integrations;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

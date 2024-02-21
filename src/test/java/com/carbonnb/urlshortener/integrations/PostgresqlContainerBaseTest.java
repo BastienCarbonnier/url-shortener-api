@@ -1,4 +1,4 @@
-package com.carbonnb.urlshortener;
+package com.carbonnb.urlshortener.integrations;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;

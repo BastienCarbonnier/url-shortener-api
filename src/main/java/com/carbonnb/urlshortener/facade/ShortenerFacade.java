@@ -4,7 +4,7 @@ import com.carbonnb.urlshortener.exception.ErrorCodeExceptionEnum;
 import com.carbonnb.urlshortener.exception.UrlShortenerTechnicalException;
 import com.carbonnb.urlshortener.model.ShortenedUrl;
 import com.carbonnb.urlshortener.model.dto.*;
-import com.carbonnb.urlshortener.services.ShortenedUrlService;
+import com.carbonnb.urlshortener.integrations.services.ShortenedUrlService;
 import com.carbonnb.urlshortener.utils.UrlShortenerUtils;
 import org.springframework.stereotype.Component;
 
