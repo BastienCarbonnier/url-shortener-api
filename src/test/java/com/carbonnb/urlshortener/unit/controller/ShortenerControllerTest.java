@@ -56,4 +56,15 @@ public class ShortenerControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk());
     }
+
+    @Test
+    public void shouldThrowExceptionIfNoUrlToShorten() throws Exception {
+        RequestDTO requestDTO = new RequestDTO();
+        requestDTO.setUrlToShorten(null);
+
+        when(shortenerFacade.shortenUrl(requestDTO)).thenReturn(new ResponseDTO<>());
+        mockMvc.perform(post("/url-shortener/shorten"))
+                .andDo(print())
+                .andExpect(status().isInternalServerError());
+    }
 }
