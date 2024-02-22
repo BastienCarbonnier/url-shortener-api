@@ -54,3 +54,10 @@ This docker-compose file is pulling latest image of my personal docker hub repos
 - [Docker](https://www.docker.com/)
 - [Gradle](https://gradle.org/)
 - [Project Lombok](https://projectlombok.org/)
+
+## Testing
+
+You can run integration and unit tests with : 
+```bash
+gradle check
+```

@@ -3,8 +3,6 @@ package com.carbonnb.urlshortener.integrations.facade;
 import com.carbonnb.urlshortener.exception.UrlShortenerTechnicalException;
 import com.carbonnb.urlshortener.facade.ShortenerFacade;
 import com.carbonnb.urlshortener.integrations.helper.PostgresqlContainerBase;
-import com.carbonnb.urlshortener.integrations.services.ShortenedUrlService;
-import com.carbonnb.urlshortener.model.ShortenedUrl;
 import com.carbonnb.urlshortener.model.dto.RequestDTO;
 import com.carbonnb.urlshortener.model.dto.ResponseDTO;
 import com.carbonnb.urlshortener.model.dto.ResponseUrlDTO;
@@ -15,8 +13,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
