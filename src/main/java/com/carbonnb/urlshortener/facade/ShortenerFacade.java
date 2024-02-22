@@ -41,10 +41,7 @@ public class ShortenerFacade {
             shortenedUrlDTO.setFullUrl(decodedFullUrl);
         } else {
             ShortenedUrl shortenUrl = new ShortenedUrl();
-
-            // We encode Url to base 64 (TODO: url should be encrypt to avoid personal information to be visible in db)
-            String encodedFullUrl = UrlShortenerUtils.encodeToBase64Url(request.getUrlToShorten());
-            shortenUrl.setFullUrl(encodedFullUrl);
+            shortenUrl.setFullUrl(request.getUrlToShorten());
 
             String shortUrl = UrlShortenerUtils.shortenUrl(shortenUrl.getId().toString());
             shortenUrl.setShortenedUrl(shortUrl);

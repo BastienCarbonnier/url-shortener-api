@@ -16,6 +16,9 @@ public class ShortenedUrlService {
     }
 
     public void save(ShortenedUrl shortenedUrl) {
+        // We encode Url to base 64 (TODO: url should be encrypt to avoid personal information to be visible in db)
+        String encodedFullUrl = UrlShortenerUtils.encodeToBase64Url(shortenedUrl.getFullUrl());
+        shortenedUrl.setFullUrl(encodedFullUrl);
         this.shortenedUrlRepository.save(shortenedUrl);
     }
 

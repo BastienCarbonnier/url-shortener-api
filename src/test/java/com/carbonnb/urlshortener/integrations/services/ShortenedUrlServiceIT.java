@@ -45,9 +45,26 @@ public class ShortenedUrlServiceIT extends PostgresqlContainerBase {
         this.shortenedUrlService.save(shortenedUrl);
 
         Optional<ShortenedUrl> foundShortenUrlOptional = this.shortenedUrlService.findByFullUrl(fullUrl);
-        // Assertions.assertTrue(foundShortenUrlOptional.isPresent());
+        Assertions.assertTrue(foundShortenUrlOptional.isPresent());
 
-        //ShortenedUrl foundShortenUrl = foundShortenUrlOptional.get();
-        // Assertions.assertEquals(foundShortenUrl, shortenedUrl);
+        ShortenedUrl foundShortenUrl = foundShortenUrlOptional.get();
+        Assertions.assertEquals(foundShortenUrl, shortenedUrl);
+    }
+
+    @Test
+    public void shouldFindByShortUrl() {
+        ShortenedUrl shortenedUrl = new ShortenedUrl();
+        String fullUrl = "http://test.com/fullurlService2";
+        String shortUrl = "servShort3";
+        shortenedUrl.setShortenedUrl(shortUrl);
+        shortenedUrl.setFullUrl(fullUrl);
+
+        this.shortenedUrlService.save(shortenedUrl);
+
+        Optional<ShortenedUrl> foundShortenUrlOptional = this.shortenedUrlService.findByShortenedUrl(shortUrl);
+        Assertions.assertTrue(foundShortenUrlOptional.isPresent());
+
+        ShortenedUrl foundShortenUrl = foundShortenUrlOptional.get();
+        Assertions.assertEquals(foundShortenUrl, shortenedUrl);
     }
 }
