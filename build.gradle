@@ -43,6 +43,11 @@ test {
 }
 jacocoTestReport {
 	dependsOn test // tests are required to run before generating the report
+	afterEvaluate {
+		classDirectories = files(classDirectories.files.collect {
+			fileTree(dir: it, exclude: ['**/model/**'])
+		})
+	}
 }
 
 tasks.named('test') {
