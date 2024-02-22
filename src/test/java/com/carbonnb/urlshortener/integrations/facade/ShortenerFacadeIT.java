@@ -34,7 +34,7 @@ public class ShortenerFacadeIT extends PostgresqlContainerBase {
 
     @Test
     public void shouldReturnAlreadyShortenedUrl() {
-        String fullUrl = "http://test.com/fullurlService";
+        String fullUrl = "http://test.com/fullurlService2";
         RequestDTO requestDTO = new RequestDTO();
         requestDTO.setUrlToShorten(fullUrl);
 
@@ -52,7 +52,7 @@ public class ShortenerFacadeIT extends PostgresqlContainerBase {
 
     @Test
     public void shouldFindByShortenedUrl() throws UrlShortenerTechnicalException {
-        String fullUrl = "http://test.com/fullurlService";
+        String fullUrl = "http://test.com/fullurlService3";
         RequestDTO requestDTO = new RequestDTO();
         requestDTO.setUrlToShorten(fullUrl);
 
